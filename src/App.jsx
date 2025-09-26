@@ -1,40 +1,51 @@
 
-import React, { useState } from 'react'
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import HomePage from './components/HomePage'
+import MixFlavorsPage from './components/MixFlavorsPage'
 
 export default function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <main className="mx-auto max-w-2xl px-4 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">AI Prototype Starter</h1>
-      <p className="mt-2 text-neutral-600">
-        React + Tailwind + Vite. Ask your AI to add a small feature, then ship.
-      </p>
+    <Router>
+      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100">
+        {/* Navigation */}
+        <nav className="bg-white shadow-lg sticky top-0 z-50">
+          <div className="max-w-6xl mx-auto px-4 py-3">
+            <div className="flex items-center justify-between">
+              <Link to="/" className="flex items-center space-x-2">
+                <div className="w-10 h-10 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xl font-bold">🍦</span>
+                </div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                  Rainbow Scoops
+                </h1>
+              </Link>
+              <div className="flex space-x-4">
+                <Link 
+                  to="/" 
+                  className="px-4 py-2 rounded-full bg-pink-200 text-pink-800 font-semibold hover:bg-pink-300 transition-colors"
+                >
+                  🏠 Home
+                </Link>
+                <Link 
+                  to="/mix" 
+                  className="px-4 py-2 rounded-full bg-purple-200 text-purple-800 font-semibold hover:bg-purple-300 transition-colors"
+                >
+                  🎨 Mix Flavors
+                </Link>
+              </div>
+            </div>
+          </div>
+        </nav>
 
-      <section className="mt-6 grid gap-3 sm:grid-cols-2">
-        <button
-          onClick={() => setCount((c) => c + 1)}
-          className="rounded-2xl border border-neutral-300 bg-white px-4 py-2 shadow-sm hover:shadow-md"
-        >
-          Clicks: <span className="font-mono">{count}</span>
-        </button>
-
-        <button
-          onClick={() => alert('Now ask your AI to replace this alert with a toast. Or tabs. Or a form.')}
-          className="rounded-2xl border border-neutral-300 bg-white px-4 py-2 shadow-sm hover:shadow-md"
-        >
-          Do something useful
-        </button>
-      </section>
-
-      <div className="mt-8 rounded-2xl border border-dashed border-neutral-300 p-4">
-        <h2 className="font-medium">Try these prompts</h2>
-        <ul className="list-disc pl-6 text-sm text-neutral-700">
-          <li>Add a simple toast component and wire it to the second button.</li>
-          <li>Refactor the button styles into reusable Tailwind classes.</li>
-          <li>Create a small tabs component with keyboard navigation.</li>
-        </ul>
+        {/* Main Content */}
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/mix" element={<MixFlavorsPage />} />
+          </Routes>
+        </main>
       </div>
-    </main>
+    </Router>
   )
 }
